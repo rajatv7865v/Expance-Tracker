@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import Chartjs from "./Chartjs";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -31,7 +31,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const Expanse = () => {
-  const navigate = useNavigate();
+  const [isTrue,setIsTrue]=useState(true);
   const selector = useSelector((state) => state);
   const data = selector.expance.totalExpanse;
   console.log(data);
@@ -43,9 +43,9 @@ const Expanse = () => {
           padding: "10px",
           background: "light-grey",
         }}
-        onClick={() => navigate("/chart")}
+        onClick={() => setIsTrue(!isTrue)}
       >
-        Show Chart
+        {isTrue?'Show Chart':'Hide Chart'}
       </button>
       <h1 style={{ textAlign: "center" }}>Expances</h1>
       <TableContainer component={Paper}>
@@ -70,6 +70,7 @@ const Expanse = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      {isTrue?null:<Chartjs expanse={data}/>}
     </div>
   );
 };
