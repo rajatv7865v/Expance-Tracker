@@ -8,6 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -29,11 +30,23 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const Income = () => {
+  const navigate = useNavigate();
   const selector = useSelector((state) => state);
   const data = selector.expance.totalIncome;
   //   console.log(data);
   return (
     <div>
+      <button
+        style={{
+          margin: "10px 0px 0px 10px",
+          padding: "10px",
+          background: "light-grey",
+        }}
+        onClick={() => navigate("/chart")}
+      >
+        Show Chart
+      </button>
+
       <h1 style={{ textAlign: "center" }}>Expances</h1>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
