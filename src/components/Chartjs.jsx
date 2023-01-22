@@ -34,5 +34,5 @@ export const data = {
 };
 
 export default function Chartjs({ value }) {
-  return <Bar data={data} />;
+  return <Bar data={data}  style={{margin:'5%'}}/>;
 }
